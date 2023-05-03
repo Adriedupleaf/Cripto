@@ -38,7 +38,7 @@ public class RSA extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    setKey(Cripts.generateRSAKeyPair());
+                    setKey(Cripts.gRSAkey());
                     PubKField.setText(getKey().getPublic().toString());
                     PriKField.setText(getKey().getPrivate().toString());
                 } catch (NoSuchAlgorithmException ex) {
@@ -71,7 +71,7 @@ public class RSA extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    setKeyAES(Cripts.generateAESKey());
+                    setKeyAES(Cripts.gAESkey());
                     keyField.setText(getKeyAES().toString().substring(32));
                 } catch (NoSuchAlgorithmException ex) {
                     throw new RuntimeException(ex);
@@ -83,7 +83,7 @@ public class RSA extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     if(keyAES!=null&&key!=null){
-                    setEnKey(Cripts.encryptRSA(getKeyAES().getEncoded(),getKey().getPublic()));
+                    setEnKey(Cripts.enRSA(getKeyAES().getEncoded(),getKey().getPublic()));
                     enKeyField.setText(getEnKey().toString());
                     }
                 } catch (Exception ex) {
@@ -96,7 +96,7 @@ public class RSA extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     if(key!=null&&keyAES!=null&&enKey!=null){
-                    byte[] k= Cripts.decryptRSA(getEnKey(), getKey().getPrivate());
+                    byte[] k= Cripts.decRSA(getEnKey(), getKey().getPrivate());
                     DecKField.setText(new SecretKeySpec(k, "AES").toString().substring(32));}
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);

@@ -36,8 +36,8 @@ public class DSA extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    setSecretKey(Cripts.generateAESKey());
-                    setKey(Cripts.generateRSAKeyPair());
+                    setSecretKey(Cripts.gAESkey());
+                    setKey(Cripts.gRSAkey());
                     DPubField.setText(getKey().toString().substring(22));
                     DPrivField.setText(getKey().toString().substring(22));
 
@@ -66,8 +66,8 @@ public class DSA extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     if(messageField.getText().length()!=0&&secretKey!=null&&key!=null) {
-                        sign = Cripts.encryptAES(messageField.getText(), secretKey);
-                        signD = Cripts.signMessage(sign,key.getPrivate());
+                        sign = Cripts.enAES(messageField.getText(), secretKey);
+                        signD = Cripts.signM(sign,key.getPrivate());
                         enField.setText(signD.toString());
                     }
                 } catch (Exception ex) {
@@ -80,7 +80,7 @@ public class DSA extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    decField.setText(String.valueOf(Cripts.verifySignature(sign,signD,key.getPublic())));
+                    decField.setText(String.valueOf(Cripts.signV(sign,signD,key.getPublic())));
 
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);

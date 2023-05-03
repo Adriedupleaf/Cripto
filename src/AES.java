@@ -31,7 +31,7 @@ public class AES extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    setKey(Cripts.generateAESKey());;
+                    setKey(Cripts.gAESkey());;
                     keyField.setText(getKey().toString().substring(32));
                 } catch (NoSuchAlgorithmException ex) {
                     throw new RuntimeException(ex);
@@ -59,7 +59,7 @@ public class AES extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(key!=null&&messageField.getText().length()!=0){
                     try {
-                        setText(Cripts.encryptAES(messageField.getText(),getKey()));
+                        setText(Cripts.enAES(messageField.getText(),getKey()));
                         EnMessField.setText(getText().toString());
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
@@ -73,7 +73,7 @@ public class AES extends JFrame{
                 if(key!=null&&EnMessField.getText().length()!=0) {
 
                     try {
-                        DecMessField.setText(Cripts.decryptAES(getText(),getKey()).toString());
+                        DecMessField.setText(Cripts.decAES(getText(),getKey()).toString());
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
